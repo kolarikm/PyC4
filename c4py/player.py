@@ -1,4 +1,4 @@
 class Player(object):
-    def __init__(self, name, symbol):
+    def __init__(self, name, sym):
         self.name = name
-        self.symbol = symbol
+        self.sym = sym

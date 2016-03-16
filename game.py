@@ -48,11 +48,11 @@ b.prb()
 if __name__ == "__main__":
     board = board.Board(width, height)
     board.prb()
-    player = 1
     i = 0
+    alternate = cycle((1,2))
     while True:
         i += 1
-
+        player = next(alternate)
         if i == 5:
             break
         print "Player " + str(player) + " choose a column"

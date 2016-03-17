@@ -34,24 +34,37 @@ def check_v(board, length):
                     return board[r][c]
     return "No winner!"
 
-def check_b_d(board, length):
+def check_f_d(board, length):
     i = 0
-    for r in xrange((length)-1):
+    for r in xrange(length-1, len(board), 1):
         for c in xrange(len(board[r])-length+1):
-            i += 1
-            print i
+            match = 0
+            if board[r][c] != 0:
+                for x in xrange(length):
+                    if board[r-x][c+x] == board[r][c]:
+                        match += 1
+                if match == length:
+                    return board[r][c]
+    return "No winner!"
                 
 
 gb = Board(10,10)
-
+'''
 place_token(1, 1, gb.game_board)
 place_token(1, 2, gb.game_board)
 place_token(1, 3, gb.game_board)
-#place_token(1, 4, gb.game_board)
+place_token(1, 4, gb.game_board)
 
 place_token(1, 1, gb.game_board)
 place_token(1, 1, gb.game_board)
 place_token(1, 1, gb.game_board)
+'''
+
+gb.game_board[0][3] = 1
+gb.game_board[1][2] = 1
+gb.game_board[2][1] = 1
+gb.game_board[3][0] = 1
+gb.game_board[4][4] = 1
 
 gb.prb()
 
@@ -61,4 +74,5 @@ gb.prb()
 #w = check_v(gb.game_board, 4)
 #print w
 
-check_b_d(gb.game_board, 4)
+winnar = check_b_d(gb.game_board, 4)
+print winnar

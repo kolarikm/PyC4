@@ -4,6 +4,7 @@ class Board:
         self.width = width
         self.height = height
         #self.game_board = [[0 for i in xrange(height)] for j in xrange(width)]
+        #Lambda function...
         board = lambda w, h: [[0] * w for i in range(h)]
         self.game_board = board(width, height)
         

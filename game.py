@@ -5,26 +5,18 @@ from c4py import board
 from c4py import engine
 from c4py import player
 from c4py import save_load
+from pprint import pprint
 
 class Game:
-    #Default board dimensions
-    width=10
-    height=10
-    length=4
-
     def __init__(self):
+        #defaults
         width = 10
         height = 10
         length = 4
 
-    '''
-    b = board.Board(5, 5)
-    engine.place_token(1,0,b.game_board)
-    b.prb()
-    '''
-
 if __name__ == "__main__":
-#Attempt to read 3 command line arguments -w for width, -h for height, and -l for length
+    #Attempt to read 3 command line arguments
+    #-w for width, -h for height, and -l for length
     try:
         myopts, args = getopt.getopt(sys.argv[1:],"w:h:l:")
     except getopt.GetoptError as e:
@@ -32,7 +24,7 @@ if __name__ == "__main__":
         print("Usage: %s -w width -h height -l length" % sys.argv[0])
         sys.exit(2)
 
-#Assign arguments to variables if they are integers, exit it not
+        #Assign arguments to variables if they are integers, exit it not
     for opt, arg in myopts:
         if opt == '-w':
             try:
@@ -53,35 +45,34 @@ if __name__ == "__main__":
                 print "Board dimensions must be integers"
                 sys.exit(2)
 
+    #Game loop
+    engine.print_title()
     board = board.Board(width, height)
     board.prb()
-    i = 0
+    cur_game = save_load.Saved(board, 1)
     alternate = cycle((1,2))
+    player = next(alternate)
     while True:
-        i += 1
-        player = next(alternate)
-        if i == 10:
-            break
         print "Player " + str(player) + " choose a column"
         choice = raw_input()
+        print
         if choice is 's':
             print "Saved!"
             to_save = save_load.Saved(board, player)
             to_save.save()
         elif choice is 'l':
             print "Loaded!"
+            cur_game = cur_game.load()
+            board = cur_game.board
+            player = cur_game.cur_player
+            board.prb()
+            continue
         elif choice is 'q':
             sys.exit()
         else:
-            engine.place_token(player, int(choice)-1, board.game_board)
+            try:
+                engine.place_token(player, int(choice)-1, board.game_board)
+            except ValueError:
+                print "Incompatible input"
             board.prb()
-
-    '''
-    alternate = cycle((1,2))
-    p = next(alternate)
-    print p
-    p = next(alternate)
-    print p
-    p = next(alternate)
-    print p
-    '''
+            player = next(alternate)

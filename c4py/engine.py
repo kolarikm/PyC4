@@ -80,38 +80,3 @@ def print_title():
     print "| |    / _ \| '_ \| '_ \ / _ \/ __| __| / /_| |"
     print "| \__/\ (_) | | | | | | |  __/ (__| |_  \___  |"
     print " \____/\___/|_| |_|_| |_|\___|\___|\__|     |_/\n"
-
-'''
-gb = Board(10,10)
-
-place_token(1, 1, gb.game_board)
-place_token(1, 2, gb.game_board)
-place_token(1, 3, gb.game_board)
-place_token(1, 4, gb.game_board)
-
-place_token(1, 1, gb.game_board)
-place_token(1, 1, gb.game_board)
-place_token(1, 1, gb.game_board)
-
-
-gb.game_board[0][0] = 1
-gb.game_board[1][1] = 1
-gb.game_board[2][2] = 1
-gb.game_board[3][3] = 1
-gb.game_board[4][8] = 1
-
-gb.prb()
-
-#win = check_h(gb.game_board, 4)
-#print win
-
-#w = check_v(gb.game_board, 4)
-#print w
-
-#winnar = check_b_d(gb.game_board, 4)
-#print winnar
-
-#winner = check_b_d(gb.game_board, 4)
-win = winner(gb.game_board, 4)
-print win
-'''
